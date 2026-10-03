@@ -616,6 +616,19 @@ h1 {
     padding: 20px;
   }
 
+  .project-icon {
+    width: 64px;
+    padding: 8px;
+  }
+
+  .project h3 {
+    font-size: 13px;
+  }
+
+  .project > p {
+    max-width: 68ch;
+  }
+
   .contact-list div {
     grid-template-columns: 120px 1fr;
     align-items: baseline;
@@ -633,11 +646,6 @@ h1 {
   .hero-slot {
     width: 150px;
     padding: 14px;
-  }
-
-  .about {
-    grid-template-columns: 3fr 2fr;
-    gap: 32px;
   }
 
   .skill-grid {
