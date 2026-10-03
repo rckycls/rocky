@@ -1,0 +1,661 @@
+/* Flat pixel theme — black, white and grays. Mobile first. */
+
+:root {
+  --ink: #111111;
+  --paper: #ffffff;
+  --bg: #e6e6e6;
+  --g1: #d6d6d6;
+  --g2: #b4b4b4;
+  --g3: #6b6b6b;
+  --g4: #333333;
+  --px: 2px;
+  --step: 3px;
+  --head: "Press Start 2P", ui-monospace, monospace;
+  --body: "VT323", ui-monospace, monospace;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --px: 3px;
+    --step: 4px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 19px;
+  line-height: 1.15;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: var(--px) dashed var(--ink);
+  outline-offset: calc(var(--px) * 2);
+}
+
+.wrap {
+  width: min(100% - 32px, 1080px);
+  margin-inline: auto;
+}
+
+/* ---------- pixel primitives ---------- */
+
+/* Flat blocks with stepped "pixel" corners — no borders, bevels or shadows. */
+.box,
+.btn,
+.featured,
+.tags span,
+.badge,
+.brand-mark,
+.hero-slot,
+.project-icon {
+  --s1: var(--step);
+  --s2: calc(var(--step) * 2);
+  clip-path: polygon(
+    0 var(--s2), var(--s1) var(--s2), var(--s1) var(--s1), var(--s2) var(--s1), var(--s2) 0,
+    calc(100% - var(--s2)) 0, calc(100% - var(--s2)) var(--s1), calc(100% - var(--s1)) var(--s1), calc(100% - var(--s1)) var(--s2), 100% var(--s2),
+    100% calc(100% - var(--s2)), calc(100% - var(--s1)) calc(100% - var(--s2)), calc(100% - var(--s1)) calc(100% - var(--s1)), calc(100% - var(--s2)) calc(100% - var(--s1)), calc(100% - var(--s2)) 100%,
+    var(--s2) 100%, var(--s2) calc(100% - var(--s1)), var(--s1) calc(100% - var(--s1)), var(--s1) calc(100% - var(--s2)), 0 calc(100% - var(--s2))
+  );
+}
+
+.tags span,
+.badge {
+  --step: 2px;
+}
+
+.box {
+  background: var(--paper);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 14px;
+  background: var(--g1);
+  color: var(--ink);
+  font-family: var(--head);
+  font-size: 9px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--g2);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-dark:hover {
+  background: var(--g4);
+}
+
+/* clip-path hides outlines, so show focus with an inverted block instead. */
+.btn:focus-visible {
+  outline: none;
+  background: var(--g3);
+  color: var(--paper);
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 6px;
+}
+
+.tags span {
+  padding: 2px 8px;
+  background: var(--g1);
+  font-size: 17px;
+  line-height: 1.1;
+}
+
+/* ---------- header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 20px;
+  padding-block: 8px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--head);
+  font-size: 10px;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+}
+
+.site-nav {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.site-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.site-nav a {
+  flex: 1 0 auto;
+  padding: 2px 4px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.site-nav a:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- layout ---------- */
+
+main {
+  display: grid;
+  gap: 24px;
+  padding-block: 20px 32px;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--head);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.panel-title span {
+  color: var(--g2);
+}
+
+.panel-body {
+  padding: 14px 14px 18px;
+}
+
+h3 {
+  font-family: var(--head);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: grid;
+  gap: 16px;
+  padding: 18px 14px 20px;
+}
+
+.hero-slot {
+  width: 56px;
+  padding: 6px;
+  background: var(--g1);
+}
+
+.hero-slot svg {
+  display: block;
+  width: 100%;
+}
+
+.hero-slot .ink {
+  fill: var(--ink);
+}
+
+
+.hero-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.eyebrow {
+  color: var(--g3);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-family: var(--head);
+  font-size: clamp(14px, 4.2vw, 28px);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.hero-line {
+  color: var(--g3);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.9em;
+  margin-left: 0.2em;
+  background: var(--ink);
+  vertical-align: -0.05em;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- stats ---------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stats > div {
+  display: grid;
+  gap: 6px;
+  padding: 10px;
+}
+
+.stats strong {
+  font-family: var(--head);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.stats span {
+  color: var(--g3);
+}
+
+/* ---------- about ---------- */
+
+.about {
+  display: grid;
+  gap: 14px;
+}
+
+.lead {
+  font-size: 21px;
+}
+
+.checklist {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist li::before {
+  content: "\25A0";
+  margin-right: 10px;
+}
+
+/* ---------- skills ---------- */
+
+.skill-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.featured {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.featured h3 {
+  font-size: 11px;
+}
+
+.featured .tags span {
+  background: var(--g4);
+  color: var(--paper);
+}
+
+.badge {
+  justify-self: start;
+  padding: 3px 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--head);
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+.skill-row {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+}
+
+/* ---------- experience ---------- */
+
+.work-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.timeline {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  list-style: none;
+  border-left: var(--px) solid var(--ink);
+}
+
+.timeline li {
+  position: relative;
+  display: grid;
+  gap: 4px;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: calc(-18px - var(--px) / 2 - 5px);
+  width: 10px;
+  height: 10px;
+  background: var(--ink);
+}
+
+.timeline span {
+  font-family: var(--head);
+  font-size: 8px;
+  color: var(--g3);
+}
+
+.timeline strong {
+  font-weight: 400;
+  font-size: 21px;
+}
+
+.timeline p {
+  color: var(--g3);
+}
+
+/* ---------- project ---------- */
+
+.project {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
+.project-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.project-icon {
+  flex: none;
+  width: 44px;
+  padding: 5px;
+  background: var(--g1);
+}
+
+.project-icon svg {
+  display: block;
+  width: 100%;
+  fill: var(--ink);
+}
+
+.project h3 {
+  font-size: 10px;
+}
+
+.project-url {
+  color: var(--g3);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- contact ---------- */
+
+.contact {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-cta {
+  font-family: var(--head);
+  font-size: clamp(12px, 3.4vw, 18px);
+  line-height: 1.6;
+}
+
+.contact-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.contact-list div {
+  display: grid;
+  gap: 2px;
+}
+
+.contact-list dt {
+  font-family: var(--head);
+  font-size: 8px;
+  color: var(--g3);
+  text-transform: uppercase;
+}
+
+.contact-list dd {
+  margin: 0;
+  font-size: 21px;
+  overflow-wrap: anywhere;
+}
+
+.contact-list a {
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.contact-list a:hover {
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+}
+
+/* ---------- footer ---------- */
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 24px;
+  padding: 14px 0 24px;
+  border-top: 2px solid var(--g2);
+  color: var(--g3);
+  font-size: 17px;
+}
+
+/* ---------- tablet ---------- */
+
+@media (min-width: 640px) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .site-nav {
+    width: auto;
+  }
+
+  .site-nav a {
+    flex: none;
+    padding-inline: 6px;
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 20px;
+  }
+
+  main {
+    gap: 32px;
+    padding-block: 32px 44px;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    padding: 11px 16px;
+  }
+
+  .panel-body {
+    padding: 20px 20px 22px;
+  }
+
+  .hero {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .hero-slot {
+    width: 110px;
+    padding: 10px;
+  }
+
+  .stats strong {
+    font-size: 15px;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured {
+    grid-column: 1 / -1;
+    padding: 20px;
+  }
+
+  .contact-list div {
+    grid-template-columns: 120px 1fr;
+    align-items: baseline;
+  }
+}
+
+/* ---------- desktop ---------- */
+
+@media (min-width: 1024px) {
+  .hero {
+    padding: 36px;
+    gap: 36px;
+  }
+
+  .hero-slot {
+    width: 150px;
+    padding: 14px;
+  }
+
+  .about {
+    grid-template-columns: 3fr 2fr;
+    gap: 32px;
+  }
+
+  .skill-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .work-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cursor {
+    animation: none;
+  }
+}
