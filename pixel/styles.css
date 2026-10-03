@@ -78,7 +78,6 @@ p {
 .tags span,
 .badge,
 .brand-mark,
-.hero-slot,
 .project-icon {
   --s1: var(--step);
   --s2: calc(var(--step) * 2);
@@ -260,40 +259,29 @@ h3 {
 /* ---------- hero ---------- */
 
 .hero {
-  display: grid;
-  gap: 16px;
-  padding: 18px 14px 20px;
+  padding: 14px 14px 16px;
 }
 
-.hero-slot {
-  width: 56px;
-  padding: 6px;
-  background: var(--g1);
-}
-
-.hero-slot svg {
-  display: block;
-  width: 100%;
-}
-
-.hero-slot .ink {
-  fill: var(--ink);
+.hero .btn {
+  padding: 8px 10px;
+  font-size: 8px;
 }
 
 
 .hero-copy {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .eyebrow {
   color: var(--g3);
+  font-size: 16px;
   text-transform: uppercase;
 }
 
 h1 {
   font-family: var(--head);
-  font-size: clamp(14px, 4.2vw, 28px);
+  font-size: clamp(12px, 3.4vw, 20px);
   font-weight: 400;
   line-height: 1.6;
 }
@@ -592,15 +580,7 @@ h1 {
   }
 
   .hero {
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 24px;
-    padding: 24px;
-  }
-
-  .hero-slot {
-    width: 110px;
-    padding: 10px;
+    padding: 18px 20px 20px;
   }
 
   .stats strong {
@@ -639,13 +619,7 @@ h1 {
 
 @media (min-width: 1024px) {
   .hero {
-    padding: 36px;
-    gap: 36px;
-  }
-
-  .hero-slot {
-    width: 150px;
-    padding: 14px;
+    padding: 24px 28px 26px;
   }
 
   .skill-grid {
