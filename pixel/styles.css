@@ -447,10 +447,21 @@ h1 {
 
 /* ---------- project ---------- */
 
+.project-list {
+  display: grid;
+  gap: 20px;
+}
+
 .project {
   display: grid;
+  align-content: start;
   gap: 12px;
   justify-items: start;
+}
+
+.project + .project {
+  padding-top: 20px;
+  border-top: 2px solid var(--g1);
 }
 
 .project-head {
@@ -605,8 +616,16 @@ h1 {
     font-size: 13px;
   }
 
-  .project > p {
-    max-width: 68ch;
+  .project-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .project + .project {
+    padding-top: 0;
+    padding-left: 28px;
+    border-top: 0;
+    border-left: 2px solid var(--g1);
   }
 
   .contact-list div {
